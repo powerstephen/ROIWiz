@@ -1,0 +1,15 @@
+@tailwind base;@tailwind components;@tailwind utilities;
+body{@apply bg-gradient-to-b from-white to-slate-50 text-slate-800}
+.card{@apply rounded-2xl border shadow-soft bg-white}
+.btn{@apply inline-flex items-center justify-center rounded-xl border px-3 py-2 text-sm shadow-sm hover:shadow transition}
+.btn-primary{@apply bg-tilla-primary text-white border-tilla-primary hover:bg-[#0900b8]}
+.badge{@apply inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-medium bg-slate-100 text-slate-600}
+input,select{@apply rounded-xl border px-3 py-2 w-full}
+label{@apply text-sm font-medium}
+h1,h2,h3{@apply text-slate-900}
+.progress{@apply w-full h-2 bg-slate-200 rounded-xl overflow-hidden}
+.progress>div{@apply h-full bg-tilla-primary}  /* brand color fill */
+.hint{@apply text-xs text-slate-500}
+.toast{@apply fixed bottom-6 right-6 bg-slate-900 text-white px-4 py-3 rounded-xl shadow-lg text-sm;opacity:0;transform:translateY(8px);transition:all .25s}
+.toast.show{opacity:1;transform:translateY(0)}
+.toggle{ @apply inline-flex items-center gap-2 text-xs }
