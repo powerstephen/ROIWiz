@@ -74,10 +74,32 @@ export default function App(){
   return (<div className='mx-auto max-w-5xl p-6 space-y-6'>
     <Header onShare={share} onExport={exportCSV}/>
     <div className='card p-4'>
-      <div className='flex items-center justify-between'>
-        <h1 className='text-xl font-semibold'>{steps[step].title}</h1>
-        <span className='text-xs text-slate-500'>Step {step+1} of {steps.length}</span>
-      </div>
+    {/* Navigation */}
+<div className="flex items-center justify-between mt-4">
+  <div className="text-xs text-slate-500">
+    Defaults update by industry; reductions are handled automatically.
+  </div>
+
+  <div className="ml-auto flex items-center gap-4">
+    {/* Back sits to the right, next to Next; hidden on first step */}
+    {step > 0 && (
+      <button
+        onClick={() => setStep(Math.max(step - 1, 0))}
+        className="px-6 py-3 text-base font-medium border rounded-xl hover:bg-slate-50 transition"
+      >
+        Back
+      </button>
+    )}
+
+    <button
+      onClick={() => setStep(Math.min(step + 1, steps.length - 1))}
+      className="px-8 py-4 text-xl font-semibold text-white rounded-xl transition bg-tilla-primary hover:brightness-110 disabled:opacity-50"
+    >
+      {step === steps.length - 1 ? 'Finish' : 'Next'}
+    </button>
+  </div>
+</div>
+
       <div className='progress mt-3'><div style={{width: ((step)/(steps.length-1))*100 + '%'}}></div></div>
     </div>
     {step===0 && <StepCompany s={s} setS={setS} Method={Method} presets={presets}/>}
