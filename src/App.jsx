@@ -7,6 +7,16 @@ import { StepCompliance } from './components/StepCompliance'
 import { StepStaffing } from './components/StepStaffing'
 import { Summary } from './components/Summary'
 
+/**
+ * CHANGES INPUT MODE
+ * If true  => "Crew changes / month / vessel" is interpreted as PER-CREW rotations.
+ *             Annual crew changes = vessels * avgCrewPerVessel * changesPerMonth * 12
+ * If false => Interpreted as CHANGE EVENTS per vessel per month (original behavior).
+ *             Annual events = vessels * changesPerMonth * 12
+ * Defaulting to TRUE to match your expectation (e.g., 50*100*3*12 = 180,000).
+ */
+const CHANGES_INPUT_IS_PER_CREW = true
+
 const Method = {
   MANUAL: 'Manual (Excel, Emails, etc.)',
   ERP: 'Non-specialised ERP',
@@ -75,7 +85,10 @@ export default function App() {
     ? s.totalCrewAllVessels
     : s.vessels * s.avgCrewPerVessel
 
-  const annualCrewChanges = s.vessels * s.changesPerMonthPerVessel * 12
+  // >>> Corrected crew changes per year <<<
+  const annualCrewChanges = CHANGES_INPUT_IS_PER_CREW
+    ? s.vessels * s.avgCrewPerVessel * s.changesPerMonthPerVessel * 12
+    : s.vessels * s.changesPerMonthPerVessel * 12
 
   // Backend improvement assumptions
   const adminReduction = ({ [Method.MANUAL]: 0.35, [Method.ERP]: 0.25, [Method.SPECIALISED]: 0.15 })[s.method] || 0.25
@@ -158,7 +171,7 @@ export default function App() {
     document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url)
   }
 
-  // Load shared state from URL
+  // Load shared state from URL (if present)
   useEffect(() => {
     const p = new URLSearchParams(location.search)
     if (p.size > 0) {
@@ -173,7 +186,7 @@ export default function App() {
 
   return (
     <div className='mx-auto max-w-5xl p-6 space-y-6'>
-      <Header onShare={share} onExport={exportCSV} />
+      <Header onExport={exportCSV} />
 
       {/* Top card: title + progress ONLY */}
       <div className='card p-4'>
