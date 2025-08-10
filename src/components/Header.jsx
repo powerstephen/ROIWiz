@@ -20,13 +20,13 @@ export function Header({ onExport }) {
       </div>
 
       {/* Centered brand block */}
-      <div className="flex flex-col items-center space-y-2">
+      <div className="flex flex-col items-center">
         <img src="/tilla-logo.svg" alt="Tilla Logo" className="h-20 w-auto" />
-        <h1 className="text-3xl font-bold text-center text-tilla-primary">
+        <h1 className="text-3xl font-bold text-center text-tilla-primary mt-2">
           Calculate Your Crew-Ops ROI
         </h1>
-        <p className="text-base font-semibold text-gray-800 text-center">
-          Estimate your savings from digitisation of crew changes
+        <p className="text-base font-semibold text-gray-800 text-center mt-1">
+          Unlock Cost Savings And Efficiency With Digitised Crew Changes
         </p>
       </div>
     </header>
