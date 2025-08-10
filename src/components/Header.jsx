@@ -1,32 +1,21 @@
-import React from 'react'
+export function Header({ onExport }) {
+  return (
+    <header className="flex flex-col items-center justify-center space-y-3 mb-6">
+      {/* Logo */}
+      <img src="/tilla-logo.svg" alt="Tilla Logo" className="h-20" />
 
-export const Header = ({ onShare, onExport }) => (
-  <div className='flex items-center justify-between py-4'>
-    {/* Brand block */}
-    <div className='flex items-center gap-2'>
-      {/* Bigger logo */}
-      <img src="/tilla-logo.svg" alt="Tilla" className="h-20 w-auto" />
-      
       {/* Tagline */}
-      <span className='text-2xl font-semibold text-[#0B00CF] leading-tight flex items-center'>
+      <h1 className="text-2xl font-bold text-center text-tilla-primary">
         Calculate Your Crew-Ops ROI
-      </span>
-    </div>
+      </h1>
 
-    {/* Action buttons */}
-    <div className='flex items-center gap-2'>
-      <button onClick={onShare} className='btn'>Share link</button>
-      <button onClick={onExport} className='btn'>Export CSV</button>
-      <a
-        href='https://www.tilla.tech/'
-        target='_blank'
-        rel='noreferrer'
-        className='btn btn-primary'
+      {/* Export Button */}
+      <button
+        onClick={onExport}
+        className="px-4 py-2 text-sm font-medium text-white bg-tilla-primary rounded-lg hover:brightness-110"
       >
-        Learn about Tilla
-      </a>
-    </div>
-  </div>
-)
-
-
+        Export CSV
+      </button>
+    </header>
+  );
+}
