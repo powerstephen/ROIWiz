@@ -1,0 +1,1 @@
+# Wizard v2 fixed — push all files including src/ and public/ to GitHub; connect to Vercel.\n
